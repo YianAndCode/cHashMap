@@ -86,6 +86,7 @@ static void defaultPut(HashMap hashMap, void* key, void* value)
     }
 }
 
+// 默认获取键对应值
 static void * defaultGet(HashMap hashMap, void * key)
 {
     int hashCode = hashMap->hashCode(hashMap, key);
@@ -101,4 +102,39 @@ static void * defaultGet(HashMap hashMap, void * key)
     } while (entry->next != NULL);
 
     return NULL;
+}
+
+// 默认删除键
+static bool defaultRemove(HashMap hashMap, void* key)
+{
+    bool isDeleted = false;
+
+    int hashCode = hashMap->hashCode(hashMap, key);
+
+    Entry entry = &hashMap->list[hashCode];
+
+    do {
+        if (entry->key == NULL) {
+            isDeleted = false;
+            break;
+        }
+
+        if (hashMap->equal(entry->key, key)) {
+            entry->key = entry->next->key;
+            entry->value = entry->next->value;
+            entry->next = entry->next->next;
+
+            hashMap->size--;
+
+            isDeleted = true;
+            break;
+        }
+    } while (entry->next != NULL);
+
+    if (hashMap->autoAssign && hashMap->size < hashMap->listSize) {
+        // 缩容
+        resizeHashMap(hashMap, hashMap->listSize / 2);
+    }
+
+    return isDeleted;
 }
