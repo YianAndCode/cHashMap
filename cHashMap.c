@@ -80,20 +80,22 @@ static int defaultHashCode(HashMap hashMap, void* key)
 
 static bool defaultEqual(void *key1, void* key2)
 {
-    return strcmp((char*)key1, (char*)key2) ? true : false;
+    return strcmp((char*)key1, (char*)key2) ? false : true;
 }
 
 static void defaultPut(HashMap hashMap, void* key, void* value)
 {
     int hashCode = hashMap->hashCode(hashMap, key);
 
-    Entry entry = &hashMap->list[hashCode];
+    Entry entry, preEntry;
+    entry = preEntry = &hashMap->list[hashCode];
 
     if (entry->key == NULL) {
         entry->key = key;
         entry->value = value;
     } else {
         do {
+            preEntry = entry;
             if (hashMap->equal(entry->key, key)) {
                 entry->value = value;
                 return;
@@ -107,7 +109,7 @@ static void defaultPut(HashMap hashMap, void* key, void* value)
         newEntry->value = value;
         newEntry->next = NULL;
 
-        entry->next = newEntry;
+        preEntry->next = newEntry;
 
     }
 
