@@ -12,6 +12,7 @@ _deps
 .idea/
 .vscode/
 .vs/
+.xcode/
 cmake-build-debug
 build/
 .clang-format
