@@ -4,9 +4,9 @@
 #define CHASHMAP_CHASHMAP_H
 
 typedef struct entry {
-    void * key;             // 键
-    void * value;           // 值
-    struct entry * next;    // 冲突链表
+    void* key;             // 键
+    void* value;           // 值
+    struct entry* next;    // 冲突链表
 }*Entry;
 
 // 创建哈希列表
@@ -16,31 +16,31 @@ Entry createEntryList(int listSize);
 typedef struct hashMap *HashMap;
 
 // 哈希函数类型
-typedef int(*HashCode)(HashMap, void * key);
+typedef int(*HashCode)(HashMap, void* key);
 
 // 创建哈希结构
 HashMap createHashMap();
 
-// 重新构建
+// 调整哈希结构大小
 static void resizeHashMap(HashMap hashMap, int listSize);
 
 // 判等函数类型
-typedef bool(*Equal)(void * key1, void * key2);
+typedef bool(*Equal)(void* key1, void* key2);
 
 // 添加键函数类型
-typedef void(*Put)(HashMap hashMap, void * key, void * value);
+typedef void(*Put)(HashMap hashMap, void* key, void* value);
 
 // 获取键对应值的函数类型
-typedef void * (*Get)(HashMap hashMap, void * key);
+typedef void* (*Get)(HashMap hashMap, void* key);
 
 // 删除键的函数类型
-typedef bool(*Remove)(HashMap hashMap, void * key);
+typedef bool(*Remove)(HashMap hashMap, void* key);
 
 // 清空Map的函数类型
 typedef void(*Clear)(HashMap hashMap);
 
 // 判断键值是否存在的函数类型
-typedef bool(*Exists)(HashMap hashMap, void * key);
+typedef bool(*Exists)(HashMap hashMap, void* key);
 
 typedef struct hashMap {
     int size;           // 当前大小
@@ -57,22 +57,22 @@ typedef struct hashMap {
 }*HashMap;
 
 // 默认哈希函数
-static int defaultHashCode(HashMap hashMap, void * key);
+static int defaultHashCode(HashMap hashMap, void* key);
 
 // 默认判断键值是否相等
-static bool defaultEqual(void * key1, void * key2);
+static bool defaultEqual(void* key1, void* key2);
 
 // 默认添加键值对
-static void defaultPut(HashMap hashMap, void * key, void * value);
+static void defaultPut(HashMap hashMap, void* key, void* value);
 
 // 默认获取键对应值
-static void * defaultGet(HashMap hashMap, void * key);
+static void* defaultGet(HashMap hashMap, void* key);
 
 // 默认删除键
-static bool defaultRemove(HashMap hashMap, void * key);
+static bool defaultRemove(HashMap hashMap, void* key);
 
 // 默认判断键是否存在
-static bool defaultExists(HashMap hashMap, void * key);
+static bool defaultExists(HashMap hashMap, void* key);
 
 // 默认清空Map
 static void defaultClear(HashMap hashMap);

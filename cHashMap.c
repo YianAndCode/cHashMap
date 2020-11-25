@@ -31,7 +31,7 @@ HashMap createHashMap()
     return hashMap;
 }
 
-static int defaultHashCode(HashMap hashMap, void * key)
+static int defaultHashCode(HashMap hashMap, void* key)
 {
     char* k = (char*)key;
     unsigned long h = 0;
@@ -87,7 +87,7 @@ static void defaultPut(HashMap hashMap, void* key, void* value)
 }
 
 // 默认获取键对应值
-static void * defaultGet(HashMap hashMap, void * key)
+static void * defaultGet(HashMap hashMap, void* key)
 {
     int hashCode = hashMap->hashCode(hashMap, key);
 
