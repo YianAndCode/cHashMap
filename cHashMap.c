@@ -131,7 +131,7 @@ static void * defaultGet(HashMap hashMap, void* key)
         }
 
         entry = entry->next;
-    } while (entry->next != NULL);
+    } while (entry != NULL);
 
     return NULL;
 }
