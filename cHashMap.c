@@ -80,6 +80,12 @@ static int defaultHashCode(HashMap hashMap, void* key)
 
 static bool defaultEqual(void *key1, void* key2)
 {
+    if (key1 == NULL && key2 == NULL) {
+        return true;
+    }
+    if (key1 == NULL || key2 == NULL) {
+        return false;
+    }
     return strcmp((char*)key1, (char*)key2) ? false : true;
 }
 
